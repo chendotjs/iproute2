@@ -107,6 +107,7 @@ int cls_entry(struct __sk_buff *skb)
 		lock_xadd(val, 1);
 
 		skb->cb[0] = ENTRY_INIT;
+		printt("skb hash: %u\n", skb->hash);
 		tail_call(skb, &jmp_tc, skb->hash & (MAX_JMP_SIZE - 1));
 	}
 

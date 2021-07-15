@@ -22,6 +22,7 @@ int cls_loop(struct __sk_buff *skb)
 	tail_call(skb, &jmp_tc, 0);
 
 	skb->tc_classid = TC_H_MAKE(1, 42);
+	printt("fallthrough1\n");
 	return TC_ACT_OK;
 }
 
@@ -29,6 +30,7 @@ __section_cls_entry
 int cls_entry(struct __sk_buff *skb)
 {
 	tail_call(skb, &jmp_tc, 0);
+	printt("fallthrough2\n");
 	return TC_ACT_SHOT;
 }
 
