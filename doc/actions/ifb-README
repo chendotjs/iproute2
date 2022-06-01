@@ -123,3 +123,17 @@ You send it any packet not originating from the actions it will drop them.
 
 cheers,
 jamal
+
+
+-------------
+
+收包流程: __netif_receive_skb_core -> sch_handle_ingress
+判断 skb_skip_tc_classify 可以跳过 tc ingress .
+
+skb_skip_tc_classify 是通过 skbuff 中的 tc_skip_classify 字段用来判定是否需要重新进入 ingress qdisc，ifb 驱动代码会设置 tc_skip_classify 为 1
+https://github.com/torvalds/linux/blob/73f3af7b4611d77bdaea303fb639333eb28e37d7/drivers/net/ifb.c#L79
+
+参考 https://blog.csdn.net/dog250/article/details/40680765
+
+cheers,
+chendotjs
